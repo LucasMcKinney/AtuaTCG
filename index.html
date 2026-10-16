@@ -349,6 +349,77 @@ main{min-height:60vh;}
 @media (max-width:600px){
   .modal-close-btn{top:6px;right:6px;background:rgba(255,255,255,0.9);}
 }
+
+/* ======================= DEMO DISCLAIMER POP-OUT ======================= */
+.disclaimer-overlay{
+  position:fixed;inset:0;z-index:250;
+  background:rgba(40,32,20,0.6);backdrop-filter:blur(4px);
+  display:none;align-items:center;justify-content:center;
+  padding:20px;overflow-y:auto;
+}
+.disclaimer-overlay.open{display:flex;}
+.disclaimer-card{
+  width:100%;max-width:520px;position:relative;
+  background:var(--surface);
+  border:3px solid var(--line-strong);
+  border-radius:var(--radius-lg);
+  padding:34px 28px 26px;
+  box-shadow:0 14px 40px rgba(40,48,58,0.22);
+  animation:modalPop .25s cubic-bezier(.2,.9,.3,1);
+  text-align:center;
+  margin:auto;
+}
+.disclaimer-icon-wrap{
+  width:64px;height:64px;border-radius:50%;
+  background:var(--gold-light);color:var(--gold-dark);
+  border:3px solid var(--gold);
+  display:inline-flex;align-items:center;justify-content:center;
+  margin-bottom:14px;
+  box-shadow:0 3px 0 rgba(0,0,0,0.06);
+}
+.disclaimer-icon-wrap svg{width:32px;height:32px;}
+.disclaimer-title{
+  font-family:var(--font-display);font-size:1.55rem;font-weight:800;
+  color:var(--ink);line-height:1.2;margin-bottom:6px;
+}
+.disclaimer-tagline{
+  font-family:var(--font-display);font-size:0.85rem;font-weight:700;
+  color:var(--gold-dark);text-transform:uppercase;letter-spacing:0.04em;
+  margin-bottom:14px;
+}
+.disclaimer-text{
+  font-family:var(--font-body);font-size:0.96rem;color:var(--ink-soft);
+  line-height:1.6;margin-bottom:14px;
+}
+.disclaimer-notice-box{
+  background:var(--bg);border:2px dashed var(--line-strong);
+  border-radius:var(--radius-sm);padding:12px 14px;
+  font-size:0.86rem;color:var(--ink-soft);text-align:left;
+  line-height:1.5;margin-bottom:20px;
+}
+.disclaimer-actions{
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+}
+.disclaimer-actions .btn{
+  width:100%;max-width:280px;justify-content:center;
+  font-size:1rem;padding:12px 20px;gap:8px;
+}
+.disclaimer-checkbox-label{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:0.82rem;color:var(--ink-faint);cursor:pointer;
+  user-select:none;
+}
+.disclaimer-checkbox-label input[type="checkbox"]{
+  width:16px;height:16px;accent-color:var(--pounamu);cursor:pointer;
+}
+.disclaimer-checkbox-label:hover{color:var(--ink-soft);}
+.footer-disclaimer-btn{
+  background:none;border:none;color:var(--pounamu-dark);
+  font:inherit;font-size:inherit;text-decoration:underline;
+  cursor:pointer;padding:0;display:inline;
+}
+.footer-disclaimer-btn:hover{color:var(--pounamu);}
+
 .detail-page{max-width:900px;margin:0 auto;}
 
 .detail-top{
@@ -739,9 +810,39 @@ footer.site-footer p{font-size:0.78rem;color:var(--ink-faint);}
   </div>
 </div>
 
+<!-- ======================= DEMO DISCLAIMER MODAL ======================= -->
+<div class="disclaimer-overlay" id="disclaimerModalOverlay" role="dialog" aria-modal="true" aria-labelledby="disclaimerTitle" aria-describedby="disclaimerLead">
+  <div class="disclaimer-card">
+    <button class="modal-close-btn" id="disclaimerCloseBtn" aria-label="Close disclaimer">
+      <svg class="icon"><use href="#i-close"/></svg>
+    </button>
+    <div class="disclaimer-icon-wrap" aria-hidden="true">
+      <svg><use href="#i-info"/></svg>
+    </div>
+    <div class="disclaimer-tagline" id="disclaimerTagline">Demonstration &amp; Educational Purposes</div>
+    <h2 class="disclaimer-title" id="disclaimerTitle">Notice: Demonstration Art</h2>
+    <p class="disclaimer-text" id="disclaimerLead">
+      Welcome to <strong>Atua TCG</strong>! Please note that all images and artwork displayed on this site are for <strong>demonstration purposes only</strong>.
+    </p>
+    <div class="disclaimer-notice-box" id="disclaimerNote">
+      Original illustrations remain the property of their respective artists (including card artwork by Māori Mermaid). Cards without custom art feature symbolic element emblems to honour the living atua of Māori tradition.
+    </div>
+    <div class="disclaimer-actions">
+      <button class="btn btn-primary" id="disclaimerAcknowledgeBtn">
+        <svg class="icon"><use href="#k-accommodation"/></svg>
+        <span id="disclaimerBtnLabel">I Understand</span>
+      </button>
+      <label class="disclaimer-checkbox-label" for="disclaimerDontShowAgain">
+        <input type="checkbox" id="disclaimerDontShowAgain">
+        <span id="disclaimerDontShowLabel">Don't show again on this device</span>
+      </label>
+    </div>
+  </div>
+</div>
+
 <footer class="site-footer">
   <p>Atua TCG is an unofficial, fan-made project — not affiliated with any iwi, hapū, or official cultural authority.<br>
-  Māori words and macrons have been checked carefully. Card art © its listed artist. Built for demonstration.</p>
+  Māori words and macrons have been checked carefully. Card art © its listed artist. Built for demonstration. · <button type="button" class="footer-disclaimer-btn" id="openDisclaimerBtn">Image Disclaimer</button></p>
 </footer>
 
 <script>
@@ -759,7 +860,14 @@ const I18N = {
     things_help:"Things That Help", our_story:"Our Atua Story", learn_more:"Want to Learn More?",
     game_tip:"Game Tip", related:"More Cards Like This", fun_fact:"Did You Know?",
     home_title:"Every Atua has *a gift*.", home_sub:"Meet the gods of Māori stories — and see how their strengths, needs, and challenges are a bit like ours.",
-    view_cards:"See All Cards", learn_rules:"Learn to Play"
+    view_cards:"See All Cards", learn_rules:"Learn to Play",
+    disclaimer_title:"Notice: Demonstration Art",
+    disclaimer_tagline:"Demonstration & Educational Purposes",
+    disclaimer_lead:"Welcome to <strong>Atua TCG</strong>! Please note that all images and artwork displayed on this site are for <strong>demonstration purposes only</strong>.",
+    disclaimer_note:"Original illustrations remain the property of their respective artists (including card artwork by Māori Mermaid). Cards without custom art feature symbolic element emblems to honour the living atua of Māori tradition.",
+    disclaimer_btn:"I Understand",
+    disclaimer_dont_show:"Don't show again on this device",
+    disclaimer_link:"Image Disclaimer"
   },
   mi: {
     nav_home:"Kāinga", nav_cards:"Kāri", nav_rules:"Ngā Ture Tākaro", nav_about:"Mō Mātou",
@@ -770,7 +878,14 @@ const I18N = {
     things_help:"Ngā Mea Āwhina", our_story:"Tō Mātou Kōrero", learn_more:"Hiahia Ako Anō?",
     game_tip:"Tohutohu Tākaro", related:"Ētahi Atu Kāri Pēnei", fun_fact:"Mōhio Koe?",
     home_title:"Every Atua has *a gift*.", home_sub:"Meet the gods of Māori stories — and see how their strengths, needs, and challenges are a bit like ours.",
-    view_cards:"Tirohia Ngā Kāri", learn_rules:"Ako ki te Tākaro"
+    view_cards:"Tirohia Ngā Kāri", learn_rules:"Ako ki te Tākaro",
+    disclaimer_title:"He Pānui: Whakaaturanga Toi",
+    disclaimer_tagline:"Mō ngā kaupapa whakaatu kau anake",
+    disclaimer_lead:"Nau mai ki <strong>Atua TCG</strong>! Kia mōhio mai koutou, ko ngā whakaahua katoa kei tēnei pae he mea <strong>whakaatu kau noa iho</strong>.",
+    disclaimer_note:"Kei ngā ringatoi tonu te mana o ngā toi tūturu (tae atu ki ngā toi nā Māori Mermaid). Mō ngā kāri kāore he whakaahua, he tohu huanga kē hei whakanui i ngā atua Māori.",
+    disclaimer_btn:"Kua Mārama Au",
+    disclaimer_dont_show:"Kaua e whakaatu anō ki tēnei pūrere",
+    disclaimer_link:"Pānui Whakaahua"
   }
 };
 
@@ -1708,15 +1823,81 @@ function openSupportModal(c){
 }
 function closeCardModal(){
   document.getElementById("cardModalOverlay").classList.remove("open");
-  document.body.style.overflow = "";
+  if(!document.getElementById("disclaimerModalOverlay") || !document.getElementById("disclaimerModalOverlay").classList.contains("open")){
+    document.body.style.overflow = "";
+  }
 }
 document.getElementById("modalCloseBtn").addEventListener("click", closeCardModal);
 document.getElementById("cardModalOverlay").addEventListener("click", (e)=>{
   if(e.target.id === "cardModalOverlay") closeCardModal();
 });
 document.addEventListener("keydown", (e)=>{
-  if(e.key === "Escape") closeCardModal();
+  if(e.key === "Escape"){
+    closeCardModal();
+    closeDisclaimerModal();
+  }
 });
+
+// ---------------------------------------------------------------------
+// DEMO DISCLAIMER MODAL
+// ---------------------------------------------------------------------
+let homeDisclaimerShownThisSession = false;
+
+function renderDisclaimer(){
+  const title = document.getElementById("disclaimerTitle");
+  if(title) title.textContent = t("disclaimer_title");
+  const tagline = document.getElementById("disclaimerTagline");
+  if(tagline) tagline.textContent = t("disclaimer_tagline");
+  const lead = document.getElementById("disclaimerLead");
+  if(lead) lead.innerHTML = t("disclaimer_lead");
+  const note = document.getElementById("disclaimerNote");
+  if(note) note.textContent = t("disclaimer_note");
+  const btn = document.getElementById("disclaimerBtnLabel");
+  if(btn) btn.textContent = t("disclaimer_btn");
+  const dontShow = document.getElementById("disclaimerDontShowLabel");
+  if(dontShow) dontShow.textContent = t("disclaimer_dont_show");
+  const openLink = document.getElementById("openDisclaimerBtn");
+  if(openLink) openLink.textContent = t("disclaimer_link");
+}
+
+function openDisclaimerModal(){
+  const overlay = document.getElementById("disclaimerModalOverlay");
+  if(!overlay) return;
+  renderDisclaimer();
+  overlay.classList.add("open");
+  document.body.style.overflow = "hidden";
+  const btn = document.getElementById("disclaimerAcknowledgeBtn");
+  if(btn) btn.focus();
+}
+
+function closeDisclaimerModal(){
+  homeDisclaimerShownThisSession = true;
+  const overlay = document.getElementById("disclaimerModalOverlay");
+  if(!overlay) return;
+  overlay.classList.remove("open");
+  if(!document.getElementById("cardModalOverlay").classList.contains("open")){
+    document.body.style.overflow = "";
+  }
+  const chk = document.getElementById("disclaimerDontShowAgain");
+  if(chk && chk.checked){
+    try { localStorage.setItem("atua_disclaimer_never_show", "true"); } catch(e){}
+  }
+}
+
+function checkHomeDisclaimer(){
+  if(homeDisclaimerShownThisSession) return;
+  try {
+    if(localStorage.getItem("atua_disclaimer_never_show") === "true") return;
+  } catch(e){}
+
+  homeDisclaimerShownThisSession = true;
+  setTimeout(()=>{
+    if(routeName() === "" && !document.getElementById("cardModalOverlay").classList.contains("open")){
+      openDisclaimerModal();
+    }
+  }, 250);
+}
+
 
 // ---------------------------------------------------------------------
 // GAME RULES VIEW
@@ -1870,6 +2051,7 @@ function route(){
   } else {
     showView("home");
     renderHome();
+    checkHomeDisclaimer();
   }
   window.scrollTo(0,0);
 }
@@ -1882,6 +2064,7 @@ document.getElementById("langToggle").addEventListener("click", ()=>{
   state.lang = state.lang === "en" ? "mi" : "en";
   document.getElementById("langLabel").textContent = state.lang === "en" ? "EN / MI" : "MI / EN";
   document.documentElement.lang = state.lang;
+  renderDisclaimer();
   route();
 });
 
@@ -1903,6 +2086,17 @@ document.addEventListener("click", e=>{
   const pk = e.target.closest("[data-preset-kind]");
   if(pk){ state.tab = "support"; state.support.kinds = new Set([pk.dataset.presetKind]); }
 });
+
+document.getElementById("disclaimerCloseBtn").addEventListener("click", closeDisclaimerModal);
+document.getElementById("disclaimerAcknowledgeBtn").addEventListener("click", closeDisclaimerModal);
+document.getElementById("disclaimerModalOverlay").addEventListener("click", (e)=>{
+  if(e.target.id === "disclaimerModalOverlay") closeDisclaimerModal();
+});
+const openDisclaimerBtn = document.getElementById("openDisclaimerBtn");
+if(openDisclaimerBtn){
+  openDisclaimerBtn.addEventListener("click", openDisclaimerModal);
+}
+
 if(!location.hash) location.hash = "#/";
 route();
 
