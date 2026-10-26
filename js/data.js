@@ -1,4 +1,4 @@
-﻿// =====================================================================
+// =====================================================================
 // ATUA TCG — DATA
 // =====================================================================
 
@@ -443,8 +443,7 @@ CARDS.forEach(c=>{ c.family="atua"; });
 const ALL_CARDS = [...CARDS, ...SUPPORT_CARDS];
 
 const IMAGES = {
-    tawhirimatea: "assets/images/atua_image_01.webp",
-    hinemoana: "assets/images/atua_image_02.webp",
-    mahuika: "assets/images/atua_image_03.webp",
+    tawhirimatea: "assets/images/tawhirimatea_god_adhd.png",
+    hinemoana: "assets/images/hinemoana_god_asd.png",
+    mahuika: "assets/images/mahuika_god_dyslexia.png",
 };
-
