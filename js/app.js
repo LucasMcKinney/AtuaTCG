@@ -109,7 +109,12 @@ function artHtml(card){
 // ---------------------------------------------------------------------
 function currentRoute(){
     const hash = location.hash.replace(/^#\/?/, "");
-    return hash.split("/").filter(Boolean);
+    if(hash) return hash.split("/").filter(Boolean);
+    const file = location.pathname.split("/").pop().toLowerCase();
+    if(file === "cards.html") return ["cards"];
+    if(file === "rules.html") return ["rules"];
+    if(file === "about.html") return ["about"];
+    return [""];
 }
 function routeName(){
     const p = currentRoute();
@@ -118,11 +123,12 @@ function routeName(){
 }
 function renderNav(){
     const active = routeName();
+    const pageHref = route => route ? `${route}.html` : "index.html";
     const items = (isMain) => NAV_ITEMS.map(n=>{
         const cls = (n.route===active) ? "active" : "";
         return isMain
-            ? `<a href="#/${n.route}" class="nav-link ${cls}">${icon(n.icon)}${t(n.key)}</a>`
-            : `<a href="#/${n.route}" class="tab-link ${cls}">${icon(n.icon)}<span>${t(n.key)}</span></a>`;
+            ? `<a href="${pageHref(n.route)}" class="nav-link ${cls}">${icon(n.icon)}${t(n.key)}</a>`
+            : `<a href="${pageHref(n.route)}" class="tab-link ${cls}">${icon(n.icon)}<span>${t(n.key)}</span></a>`;
     }).join("");
     document.getElementById("mainNav").innerHTML = items(true);
     document.getElementById("tabbarInner").innerHTML = items(false);
@@ -171,11 +177,19 @@ function sortCards(list){
 // ---------------------------------------------------------------------
 // CARD TILE
 // ---------------------------------------------------------------------
+function supportArtPath(c){
+    const aliases = { autism:"asd", tourette:"tour", abi:"tbi" };
+    const condition = aliases[c.condition] || c.condition;
+    const prefix = { accommodation:"acco", affirmation:"affirm", task:"task" }[c.kind];
+    const hasVariant = c.origin === "epigenetic" && ["adhd", "autism", "dyslexia"].includes(c.condition);
+    return `assets/images/${prefix}${hasVariant ? "2" : ""}_${condition}.png`;
+}
 function supportTileHtml(c){
     const k = KINDS[c.kind], o = ORIGINS[c.origin];
     const main = c.title || c.conditionLabel, sub = c.title ? c.conditionLabel : "";
+    const img = supportArtPath(c);
     return `<button class="card-tile support-tile" style="--cc:${o.color};--cc-l:${o.light};--kc:${k.color};--kl:${k.light}" data-card="${c.id}" aria-label="${k.label}: ${main}">
-    <div class="sup-band">${k.glyph}</div>
+    <div class="sup-band"><img src="${img}" alt="${k.label} card artwork for ${c.conditionLabel}" loading="lazy"><span class="sup-art-kind">${k.label}</span></div>
     <div class="tile-body">
       <div class="sup-kind" style="color:${k.color}">${k.label}</div>
       <div class="tile-name">${main}</div>${sub?`<div class="tile-epithet">${sub}</div>`:""}
@@ -238,29 +252,42 @@ function renderHome(){
 
     document.getElementById("homeTypeStrip").innerHTML = Object.entries(SUPERTYPES).map(([key,s])=>{
         const c = SUPERTYPE_COLOR[key];
-        return `<a href="#/cards" class="trait-card" style="--tc:${c.c};--tc-l:${c.l}" data-preset-type="${key}">
+        return `<a href="cards.html" class="trait-card" style="--tc:${c.c};--tc-l:${c.l}" data-preset-type="${key}">
       <div class="badge-icon">${icon(s.icon)}</div><b>${s.label}</b><span>${s.gloss}</span>
     </a>`;
     }).join("");
 
     document.getElementById("homeKindStrip").innerHTML = Object.entries(KINDS).map(([key,k])=>
-        `<a href="#/cards" class="trait-card" style="--tc:${k.color};--tc-l:${k.light}" data-preset-kind="${key}"><div class="badge-icon">${icon(k.icon)}</div><b>${k.label}</b><span>${k.desc}</span></a>`).join("");
+        `<a href="cards.html" class="trait-card" style="--tc:${k.color};--tc-l:${k.light}" data-preset-kind="${key}"><div class="badge-icon">${icon(k.icon)}</div><b>${k.label}</b><span>${k.desc}</span></a>`).join("");
 
     document.getElementById("homeElementStrip").innerHTML = Object.entries(ELEMENTS).map(([key,e])=>{
-        return `<a href="#/cards" class="trait-card" style="--tc:${e.color};--tc-l:${e.light}" data-preset-element="${key}">
+        return `<a href="cards.html" class="trait-card" style="--tc:${e.color};--tc-l:${e.light}" data-preset-element="${key}">
       <div class="badge-icon">${icon(e.icon)}</div><b>${e.label}</b><span>${e.gloss}</span>
     </a>`;
     }).join("");
 
-    const preview = CARDS.filter(c=>c.trait);
-    renderGrid(preview, document.getElementById("homeCardPreview"));
+    const preview = CARDS.filter(c=>c.supertype === "atua" && c.art && c.art.type === "image");
+    renderGrid(preview.slice(0, 4), document.getElementById("homeCardPreview"));
+
+    const helperPreview = [
+        SUPPORT_CARDS.find(c=>c.condition === "adhd" && c.kind === "accommodation" && c.origin === "genetic"),
+        SUPPORT_CARDS.find(c=>c.condition === "autism" && c.kind === "affirmation" && c.origin === "epigenetic"),
+        SUPPORT_CARDS.find(c=>c.condition === "dyslexia" && c.kind === "task" && c.origin === "genetic"),
+    ].filter(Boolean);
+    renderGrid(helperPreview, document.getElementById("homeHelperPreview"));
+
+    const heroCards = ["tawhirimatea", "mahuika", "maui"].map(cardById).filter(Boolean);
+    const heroWrap = document.getElementById("homeHeroCards");
+    if(heroWrap) heroWrap.innerHTML = heroCards.map(c => `<button class="home-art-card" data-card="${c.id}" aria-label="Explore ${c.name}">${artHtml(c)}<span>${c.name}</span></button>`).join("");
 }
 // home quick-filter links: clicking a type/element card jumps to Cards page pre-filtered
 document.addEventListener("click", (e)=>{
     const typeEl = e.target.closest("[data-preset-type]");
     const elEl = e.target.closest("[data-preset-element]");
-    if(typeEl){ state.tab = "atua"; state.filters.types = new Set([typeEl.dataset.presetType]); }
-    if(elEl){ state.tab = "atua"; state.filters.elements = new Set([elEl.dataset.presetElement]); }
+    const kindEl = e.target.closest("[data-preset-kind]");
+    if(typeEl){ e.preventDefault(); window.location.href = `cards.html?type=${encodeURIComponent(typeEl.dataset.presetType)}`; }
+    if(elEl){ e.preventDefault(); window.location.href = `cards.html?element=${encodeURIComponent(elEl.dataset.presetElement)}`; }
+    if(kindEl){ e.preventDefault(); window.location.href = `cards.html?tab=support&kind=${encodeURIComponent(kindEl.dataset.presetKind)}`; }
 });
 
 // ---------------------------------------------------------------------
@@ -307,11 +334,14 @@ function renderSupportFilters(){
     buildPickGrid("filterOrigin", Object.entries(ORIGINS), S.origins, cm(ORIGINS));
     const el = document.getElementById("filterCondition");
     el.innerHTML = Object.entries(CONDITIONS).map(([k,c])=>`<button class="chip-pick" data-key="${k}" aria-pressed="${S.conditions.has(k)}">${c.label}${c.teReo?`<small>${c.teReo}</small>`:""}</button>`).join("");
-    el.querySelectorAll(".chip-pick").forEach(b=>b.addEventListener("click",()=>{
+    el.querySelectorAll(".chip-pick").forEach(b=>b.addEventListener("click",(event)=>{
+        event.preventDefault();
+        const scrollY = window.scrollY;
         const k = b.dataset.key;
         if(S.conditions.has(k)) S.conditions.delete(k); else S.conditions.add(k);
         b.setAttribute("aria-pressed", S.conditions.has(k));
         renderCardsResults();
+        window.scrollTo({top:scrollY, left:0, behavior:"auto"});
     }));
     document.getElementById("originHint").innerHTML = Object.values(ORIGINS).map(o=>`<b>${o.label}:</b> ${o.kid}`).join("<br>");
 }
@@ -343,7 +373,8 @@ function renderCardsPage(){
     document.getElementById("sortSelect").value = state.sort;
     renderCardsResults();
 }
-document.getElementById("clearFiltersBtn").addEventListener("click", ()=>{
+const clearFiltersBtn = document.getElementById("clearFiltersBtn");
+if(clearFiltersBtn) clearFiltersBtn.addEventListener("click", ()=>{
     state.filters = { types:new Set(), traits:new Set(), elements:new Set(), rarities:new Set() };
     state.support = { kinds:new Set(), origins:new Set(), conditions:new Set() };
     state.query = ""; state.sort = "number";
@@ -351,14 +382,16 @@ document.getElementById("clearFiltersBtn").addEventListener("click", ()=>{
     document.getElementById("sortSelect").value = "number";
     renderCardsPage();
 });
-document.getElementById("sortSelect").addEventListener("change", e=>{ state.sort = e.target.value; renderCardsResults(); });
+const sortSelect = document.getElementById("sortSelect");
+if(sortSelect) sortSelect.addEventListener("change", e=>{ state.sort = e.target.value; renderCardsResults(); });
 let searchDebounce;
 document.getElementById("searchInput").addEventListener("input", e=>{
     clearTimeout(searchDebounce);
     const val = e.target.value;
     searchDebounce = setTimeout(()=>{ state.query = val.trim(); if(routeName()==="cards") renderCardsResults(); }, 120);
 });
-document.getElementById("mobileFilterToggle").addEventListener("click", ()=>{
+const mobileFilterToggle = document.getElementById("mobileFilterToggle");
+if(mobileFilterToggle) mobileFilterToggle.addEventListener("click", ()=>{
     document.getElementById("filterPanel").classList.toggle("open");
 });
 
@@ -475,21 +508,22 @@ function openCardModal(id){
 
     document.getElementById("cardModalOverlay").classList.add("open");
     document.body.style.overflow = "hidden";
-    document.getElementById("cardModalOverlay").scrollTop = 0;
+    const modalOverlay = document.getElementById("cardModalOverlay");
+    if(modalOverlay) modalOverlay.scrollTop = 0;
 }
 function openSupportModal(c){
     const wrap = document.getElementById("detailContent");
     const k = KINDS[c.kind], o = ORIGINS[c.origin], cond = CONDITIONS[c.condition];
     const ids = state.lastIds.includes(c.id) ? state.lastIds : SUPPORT_CARDS.map(x=>x.id);
     const i = ids.indexOf(c.id), prev = ids[(i-1+ids.length)%ids.length], next = ids[(i+1)%ids.length];
-    const atua = cond.trait ? CARDS.filter(a=>a.trait===cond.trait) : [];
+    const atua = cond.trait ? CARDS.filter(a=>a.supertype === "atua" && a.trait===cond.trait && a.art && a.art.type === "image") : [];
     const sibs = SUPPORT_CARDS.filter(s=>s.condition===c.condition && s.id!==c.id).slice(0,6);
     const R = SUPPORT_REFS[c.origin];
     const refs = Array.isArray(R) ? R : (R[c.condition]||[]);
     wrap.innerHTML = `
     <div class="detail-top" style="--cc:${o.color};--cc-l:${o.light}">
       <div>
-        <div class="detail-art sup-art" style="background:${k.light};color:${k.color}"><span>${k.glyph}</span></div>
+        <div class="detail-art sup-art" style="background:${k.light};color:${k.color}"><img src="${supportArtPath(c)}" alt="${k.label} card artwork for ${c.conditionLabel}" loading="lazy"></div>
         <div class="detail-artist">${o.label} collection · ${c.code}</div>
       </div>
       <div>
@@ -519,16 +553,20 @@ function openSupportModal(c){
     </div>`;
     document.getElementById("cardModalOverlay").classList.add("open");
     document.body.style.overflow = "hidden";
-    document.getElementById("cardModalOverlay").scrollTop = 0;
+    const modalOverlay = document.getElementById("cardModalOverlay");
+    if(modalOverlay) modalOverlay.scrollTop = 0;
 }
 function closeCardModal(){
-    document.getElementById("cardModalOverlay").classList.remove("open");
+    const overlay = document.getElementById("cardModalOverlay");
+    if(overlay) overlay.classList.remove("open");
     if(!document.getElementById("disclaimerModalOverlay") || !document.getElementById("disclaimerModalOverlay").classList.contains("open")){
         document.body.style.overflow = "";
     }
 }
-document.getElementById("modalCloseBtn").addEventListener("click", closeCardModal);
-document.getElementById("cardModalOverlay").addEventListener("click", (e)=>{
+const modalCloseBtn = document.getElementById("modalCloseBtn");
+if(modalCloseBtn) modalCloseBtn.addEventListener("click", closeCardModal);
+const cardModalOverlay = document.getElementById("cardModalOverlay");
+if(cardModalOverlay) cardModalOverlay.addEventListener("click", (e)=>{
     if(e.target.id === "cardModalOverlay") closeCardModal();
 });
 document.addEventListener("keydown", (e)=>{
@@ -585,6 +623,7 @@ function closeDisclaimerModal(){
 }
 
 function checkHomeDisclaimer(){
+    if(!document.getElementById("disclaimerModalOverlay")) return;
     if(homeDisclaimerShownThisSession) return;
     try {
         if(localStorage.getItem("atua_disclaimer_never_show") === "true") return;
@@ -732,28 +771,30 @@ function renderAbout(){
 // ---------------------------------------------------------------------
 function showView(name){
     document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
-    document.getElementById("view-"+name).classList.add("active");
+    const target = document.getElementById("view-"+name);
+    if(target) target.classList.add("active");
 }
 function route(){
     const parts = currentRoute();
     renderNav();
-    document.getElementById("filterPanel").classList.remove("open");
+    const filterPanel = document.getElementById("filterPanel");
+    if(filterPanel) filterPanel.classList.remove("open");
 
     if(parts[0]==="cards"){
         showView("cards");
-        renderCardsPage();
+        if(document.getElementById("view-cards")) renderCardsPage();
     } else if(parts[0]==="rules"){
         showView("rules");
-        renderRules();
+        if(document.getElementById("rulesContent")) renderRules();
     } else if(parts[0]==="about"){
         showView("about");
-        renderAbout();
+        if(document.getElementById("aboutContent")) renderAbout();
     } else {
         showView("home");
-        renderHome();
-        checkHomeDisclaimer();
+        if(document.getElementById("view-home")) { renderHome(); checkHomeDisclaimer(); }
     }
-    window.scrollTo(0,0);
+    // Page navigation already starts at the top; condition filters don't call route().
+    if(!document.getElementById("filterCondition")) window.scrollTo({top:0,left:0,behavior:"auto"});
 }
 window.addEventListener("hashchange", route);
 
@@ -771,7 +812,8 @@ document.getElementById("langToggle").addEventListener("click", ()=>{
 // ---------------------------------------------------------------------
 // INIT
 // ---------------------------------------------------------------------
-document.getElementById("cardTabs").addEventListener("click", e=>{
+const cardTabsEl = document.getElementById("cardTabs");
+if(cardTabsEl) cardTabsEl.addEventListener("click", e=>{
     const b = e.target.closest("[data-tab]"); if(!b) return;
     state.tab = b.dataset.tab; state.sort = "number"; renderCardsPage();
 });
@@ -781,15 +823,18 @@ document.addEventListener("click", e=>{
         state.tab = "support"; state.query = "";
         state.support = { kinds:new Set(), origins:new Set(), conditions:new Set([sc.dataset.supportCondition]) };
         closeCardModal();
-        if(routeName()==="cards") renderCardsPage(); else location.hash = "#/cards";
+        if(routeName()==="cards") renderCardsPage(); else window.location.href = `cards.html?tab=support&condition=${encodeURIComponent(sc.dataset.supportCondition)}`;
     }
     const pk = e.target.closest("[data-preset-kind]");
     if(pk){ state.tab = "support"; state.support.kinds = new Set([pk.dataset.presetKind]); }
 });
 
-document.getElementById("disclaimerCloseBtn").addEventListener("click", closeDisclaimerModal);
-document.getElementById("disclaimerAcknowledgeBtn").addEventListener("click", closeDisclaimerModal);
-document.getElementById("disclaimerModalOverlay").addEventListener("click", (e)=>{
+const disclaimerCloseBtn = document.getElementById("disclaimerCloseBtn");
+if(disclaimerCloseBtn) disclaimerCloseBtn.addEventListener("click", closeDisclaimerModal);
+const disclaimerAcknowledgeBtn = document.getElementById("disclaimerAcknowledgeBtn");
+if(disclaimerAcknowledgeBtn) disclaimerAcknowledgeBtn.addEventListener("click", closeDisclaimerModal);
+const disclaimerOverlay = document.getElementById("disclaimerModalOverlay");
+if(disclaimerOverlay) disclaimerOverlay.addEventListener("click", (e)=>{
     if(e.target.id === "disclaimerModalOverlay") closeDisclaimerModal();
 });
 const openDisclaimerBtn = document.getElementById("openDisclaimerBtn");
@@ -797,5 +842,10 @@ if(openDisclaimerBtn){
     openDisclaimerBtn.addEventListener("click", openDisclaimerModal);
 }
 
-if(!location.hash) location.hash = "#/";
+const routePreset = new URLSearchParams(location.search);
+if(routePreset.get("tab") === "support") state.tab = "support";
+if(routePreset.get("type")) state.filters.types = new Set([routePreset.get("type")]);
+if(routePreset.get("element")) state.filters.elements = new Set([routePreset.get("element")]);
+if(routePreset.get("kind")) state.support.kinds = new Set([routePreset.get("kind")]);
+if(routePreset.get("condition")) state.support.conditions = new Set([routePreset.get("condition")]);
 route();

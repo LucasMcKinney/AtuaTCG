@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>Atua TCG — Kids' Card Explorer</title>
+  <title>Atua TCG — Home</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -76,7 +76,7 @@
 <!-- ======================= HEADER ======================= -->
 <header class="topbar">
   <div class="topbar-row">
-    <a href="#/" class="brand">
+    <a href="index.html" class="brand">
       <svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M20 34C11 34 6 28 6 20 6 12 11 6 19 6c6 0 10 4 10 9s-3 8-8 8c-4 0-6-2-6-5s2-4 4-4" stroke="url(#lgrad)" stroke-width="3.6" stroke-linecap="round"/><defs><linearGradient id="lgrad" x1="6" y1="6" x2="34" y2="34"><stop stop-color="#2f9e6e"/><stop offset="1" stop-color="#e8a628"/></linearGradient></defs></svg>
       <div class="brand-text">ATUA <span>TCG</span></div>
     </a>
@@ -107,11 +107,16 @@
         <h1 id="homeTitle">Every Atua has <em>a gift.</em></h1>
         <p id="homeSub">Meet the gods of Māori stories — and see how their strengths, needs, and challenges are a bit like ours.</p>
         <div class="hero-actions">
-          <a href="#/cards" class="btn btn-primary" id="btnViewCards"><svg><use href="#i-cards"/></svg>See All Cards</a>
-          <a href="#/rules" class="btn btn-ghost" id="btnLearnRules"><svg><use href="#i-book"/></svg>Learn to Play</a>
+          <a href="cards.html" class="btn btn-primary" id="btnViewCards"><svg><use href="#i-cards"/></svg>See All Cards</a>
+          <a href="rules.html" class="btn btn-ghost" id="btnLearnRules"><svg><use href="#i-book"/></svg>Learn to Play</a>
         </div>
       </div>
       <div class="trait-strip" id="homeTraitStrip"></div>
+    </div>
+
+    <div class="home-spotlight" aria-label="Featured Atua cards">
+      <div class="home-spotlight-copy"><span class="eyebrow">EXPLORE THE COLLECTION</span><h2>Stories, strengths, and ways to help.</h2><p>Meet the illustrated Atua, then explore practical helper cards made for everyday learning and support.</p><a class="btn btn-primary" href="cards.html">Browse the collection <svg class="icon"><use href="#i-arrow-right"/></svg></a></div>
+      <div class="home-spotlight-art" id="homeHeroCards"></div>
     </div>
 
     <div class="home-section">
@@ -125,77 +130,20 @@
     </div>
 
     <div class="home-section">
+      <div class="section-head"><h2>Helper Card Artwork</h2><a href="cards.html?tab=support">Browse helper cards <svg class="icon" style="width:15px;height:15px"><use href="#i-arrow-right"/></svg></a></div>
+      <p class="section-intro">Accommodation, affirmation and task cards use the illustrations supplied with your project.</p>
+      <div class="card-grid home-helper-grid" id="homeHelperPreview"></div>
+    </div>
+
+    <div class="home-section">
       <div class="section-head"><h2>The Five Elements</h2></div>
       <div class="type-strip" id="homeElementStrip"></div>
     </div>
 
     <div class="home-section" style="margin-bottom:56px;">
-      <div class="section-head"><h2>Meet the Trait Cards</h2><a href="#/cards">See all <svg class="icon" style="width:15px;height:15px"><use href="#i-arrow-right"/></svg></a></div>
+      <div class="section-head"><h2>Featured Atua</h2><a href="cards.html">See all <svg class="icon" style="width:15px;height:15px"><use href="#i-arrow-right"/></svg></a></div>
       <div class="card-grid" id="homeCardPreview"></div>
     </div>
-  </section>
-
-  <!-- ============ CARDS ============ -->
-  <section class="view" id="view-cards">
-    <div class="cards-page">
-      <button class="btn btn-ghost mobile-filter-toggle" id="mobileFilterToggle" style="margin-bottom:-6px;">
-        <svg><use href="#i-filter"/></svg>Filters
-      </button>
-      <aside class="filter-panel" id="filterPanel">
-        <h3><svg><use href="#i-filter"/></svg>Filters</h3>
-
-        <div id="atuaFilters">
-          <div class="filter-group">
-            <div class="label">Card Type</div>
-            <div class="pick-grid" id="filterType"></div>
-          </div>
-          <div class="filter-group">
-            <div class="label">Trait</div>
-            <div class="pick-grid" id="filterTrait"></div>
-          </div>
-          <div class="filter-group">
-            <div class="label">Element</div>
-            <div class="pick-grid" id="filterElement"></div>
-          </div>
-          <div class="filter-group">
-            <div class="label">Rarity</div>
-            <div class="pick-grid" id="filterRarity"></div>
-          </div>
-        </div>
-        <div id="supportFilters">
-          <div class="filter-group"><div class="label">Kind</div><div class="pick-grid" id="filterKind"></div></div>
-          <div class="filter-group"><div class="label">Where it comes from</div><div class="pick-grid" id="filterOrigin"></div><div class="origin-hint" id="originHint"></div></div>
-          <div class="filter-group"><div class="label">Condition</div><div class="chip-list" id="filterCondition"></div></div>
-        </div>
-        <button class="clear-btn" id="clearFiltersBtn">Clear all filters</button>
-      </aside>
-
-      <div>
-        <div class="card-tabs" id="cardTabs" role="tablist"></div>
-        <div class="results-bar">
-          <div class="results-count"><b id="resultsNum">0</b> <span id="resultsLabel">cards found</span></div>
-          <select class="sort-select" id="sortSelect">
-            <option value="number">Sort: Collection order</option>
-            <option value="name">Sort: Name (A–Z)</option>
-            <option value="mana-desc">Sort: Mana (high–low)</option>
-            <option value="mana-asc">Sort: Mana (low–high)</option>
-          </select>
-        </div>
-        <div class="card-grid" id="cardsGrid"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ CARD DETAIL is a modal, not a routed view (see #cardModalOverlay below) ============ -->
-
-  <!-- ============ GAME RULES ============ -->
-  <section class="view" id="view-rules">
-    <div class="rules-page" id="rulesContent"></div>
-  </section>
-
-  <!-- ============ ABOUT ============ -->
-  <section class="view" id="view-about">
-    <div class="about-page" id="aboutContent"></div>
   </section>
 
 </main>
