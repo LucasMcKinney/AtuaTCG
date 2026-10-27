@@ -143,4 +143,61 @@ describe("AtuaTCG search and filtering", () => {
 
         expect(api.currentList().length).toBe(api.SUPPORT_CARDS.length);
     });
+
+    it("filters Atua cards by trait", () => {
+        const api = loadAppFunctions();
+        const card = api.CARDS.find(card => card.trait);
+
+        expect(card).toBeTruthy();
+
+        api.state.filters.traits.add(card.trait);
+
+        expect(api.currentList().length).toBeGreaterThan(0);
+
+        for (const result of api.currentList()) {
+            expect(result.trait).toBe(card.trait);
+        }
+    });
+
+    it("filters Atua cards by element", () => {
+        const api = loadAppFunctions();
+        const card = api.CARDS.find(card => card.elements?.length);
+
+        expect(card).toBeTruthy();
+
+        api.state.filters.elements.add(card.elements[0]);
+
+        for (const result of api.currentList()) {
+            expect(result.elements).toContain(card.elements[0]);
+        }
+    });
+
+    it("filters Atua cards by rarity", () => {
+        const api = loadAppFunctions();
+        const card = api.CARDS.find(card => card.rarity);
+
+        expect(card).toBeTruthy();
+
+        api.state.filters.rarities.add(card.rarity);
+
+        for (const result of api.currentList()) {
+            expect(result.rarity).toBe(card.rarity);
+        }
+    });
+
+    it("filters support cards by kind", () => {
+        const api = loadAppFunctions();
+        const card = api.SUPPORT_CARDS.find(card => card.kind);
+
+        expect(card).toBeTruthy();
+
+        api.state.tab = "support";
+        api.state.support.kinds.add(card.kind);
+
+        expect(api.currentList().length).toBeGreaterThan(0);
+
+        for (const result of api.currentList()) {
+            expect(result.kind).toBe(card.kind);
+        }
+    });
 });
