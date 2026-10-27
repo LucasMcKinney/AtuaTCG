@@ -128,7 +128,7 @@ const CARDS = [
     {
         id:"mahuika", number:3, supertype:"atua", set:"te-ao-marama",
         name:"Mahuika", epithet:"Keeper of Fire",
-        trait:"dyslexia", elements:["ahi"], mana:6, rarity:"rare",
+        trait:"dyslexia", elnpements:["ahi"], mana:6, rarity:"rare",
         art:{ type:"image", src:"mahuika" }, artist:"Māori Mermaid",
         abilities:[
             { kind:"gift", name:"Non-Linear Sight", text:"Sees the whole picture and spots connections other people miss." },
