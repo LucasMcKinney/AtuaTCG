@@ -156,7 +156,7 @@ const CARDS = [
         id:"maui", number:4, supertype:"atua", set:"te-ao-marama",
         name:"Māui-tikitiki-a-Taranga", epithet:"The Trickster Demigod",
         trait:"hyperfocus", elements:["kowhai","ahi"], mana:9, rarity:"legendary",
-        art:{ type:"symbolic", domain:"kowhai" },
+        art:{ type:"image", src:"mauiDyspraxia" },
         abilities:[
             { kind:"gift", name:"Deep Dive Drive", text:"Once locked on, he can work for hours on one big idea without stopping." },
             { kind:"help", name:"Flow Anchor", text:"Doing one thing at a time, somewhere calm, helps the focus last." },
@@ -459,7 +459,7 @@ for (let i = CARDS.length - 1; i >= 0; i--) {
 const _maui = _rawCard("maui");
 _maui.trait = "dyscalculia";
 _maui.epithet = "The Trickster Demigod";
-_maui.art = { type:"image", src:"maui" };
+_maui.art = { type:"image", src:"mauiDyscalculia" };
 _maui.accommodations = [
     "Visual maths tools, manipulatives and calculators",
     "Clear examples for each step",
