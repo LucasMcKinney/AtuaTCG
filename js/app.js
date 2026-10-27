@@ -300,7 +300,7 @@ function buildPickGrid(containerId, entries, filterSet, colorMap){
         const pressed = filterSet.has(key);
         const iconSym = obj.icon;
         return `<button class="pick-btn" data-key="${key}" style="--pc:${col.c||col.color};--pc-l:${col.l||col.light}" aria-pressed="${pressed}">
-      <span class="badge-icon">${icon(iconSym)}</span>${obj.label}
+      <span class="badge-icon">${icon(iconSym)}</span><span class="pick-label">${obj.label}</span>
     </button>`;
     }).join("");
     el.querySelectorAll(".pick-btn").forEach(btn=>{

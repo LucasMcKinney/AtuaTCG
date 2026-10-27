@@ -211,7 +211,7 @@ main{min-height:60vh;}
 .home-art-card:nth-child(2){transform:rotate(2deg) translateY(-8px);z-index:1;}
 .home-art-card:nth-child(3){transform:rotate(7deg) translateY(8px);}
 .home-art-card:hover{transform:translateY(-8px) rotate(0);z-index:2;}
-.home-art-card img{width:100%;height:100%;object-fit:cover;object-position:top center;}
+.home-art-card img{width:100%;height:100%;object-fit:contain;object-position:center;background:var(--bg-soft);}
 .home-art-card span{position:absolute;left:0;right:0;bottom:0;padding:22px 8px 8px;background:linear-gradient(transparent,rgba(23,35,29,.85));color:#fff;text-align:center;font-family:var(--font-display);font-weight:800;font-size:.82rem;}
 .section-intro{margin:-8px 0 18px;color:var(--ink-soft);}
 .home-helper-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
@@ -262,11 +262,16 @@ main{min-height:60vh;}
 .pick-btn{
     display:flex;flex-direction:column;align-items:center;gap:4px;
     background:var(--bg-soft);border:2.5px solid transparent;border-radius:14px;
-    padding:8px 4px;font-size:0.68rem;font-family:var(--font-display);font-weight:700;color:var(--ink-soft);
-    min-height:64px;justify-content:center;text-align:center;
+    padding:8px 6px;font-size:0.68rem;font-family:var(--font-display);font-weight:700;color:var(--ink-soft);
+    min-width:0;min-height:64px;justify-content:center;text-align:center;white-space:normal;
 }
-.pick-btn .badge-icon{width:30px;height:30px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--pc-l,#fff);}
+.pick-btn .badge-icon{width:30px;height:30px;flex:0 0 30px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--pc-l,#fff);}
 .pick-btn .badge-icon svg{width:17px;height:17px;color:var(--pc,var(--ink-soft));}
+.pick-label{min-width:0;max-width:100%;overflow-wrap:anywhere;line-height:1.25;}
+/* Long helper-card filter names get the full filter-panel width instead of overflowing tiny tiles. */
+#filterKind.pick-grid,#filterOrigin.pick-grid{grid-template-columns:minmax(0,1fr);}
+#filterKind .pick-btn,#filterOrigin .pick-btn{flex-direction:row;justify-content:flex-start;gap:10px;text-align:left;min-height:46px;padding:7px 10px;font-size:0.78rem;}
+#filterKind .pick-label,#filterOrigin .pick-label{overflow-wrap:break-word;}
 .pick-btn[aria-pressed="true"]{border-color:var(--pc,var(--pounamu));background:var(--pc-l,var(--pounamu-light));color:var(--ink);}
 .clear-btn{
     width:100%;padding:10px;border-radius:12px;background:var(--bg-soft);border:2px solid var(--line-strong);
@@ -305,11 +310,12 @@ main{min-height:60vh;}
 .card-tile:focus-visible{outline:3px solid var(--gold);outline-offset:2px;}
 
 .tile-art{
-    height:150px;position:relative;overflow:hidden;
+    height:190px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;
     background:linear-gradient(160deg, var(--cc-l,var(--pounamu-light)), var(--surface) 85%);
     border-bottom:3px solid var(--line);
 }
-.tile-art img{width:100%;height:100%;object-fit:cover;object-position:top center;}
+/* Atua artwork is portrait card art: contain it so the card edges and details are never cropped. */
+.tile-art img{width:100%;height:100%;object-fit:contain;object-position:center;background:transparent;}
 .tile-art svg.symbolic{width:100%;height:100%;}
 .tile-trait-badge{
     position:absolute;top:8px;left:8px;
@@ -514,15 +520,16 @@ main{min-height:60vh;}
 .card-tab svg{width:20px;height:20px;}
 .card-tab[aria-selected="true"]{background:var(--pounamu);border-color:var(--pounamu-dark);color:#fff;box-shadow:var(--shadow-btn);}
 .card-tab .count{background:rgba(0,0,0,0.12);border-radius:999px;padding:1px 9px;font-size:0.78rem;}
-.support-tile .sup-band{height:150px;position:relative;overflow:hidden;background:var(--kl);border-bottom:3px solid var(--line);border-top:6px solid var(--cc);}
-.support-tile .sup-band img{width:100%;height:100%;object-fit:cover;object-position:center 24%;}
+.support-tile .sup-band{height:190px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--bg-soft);border-bottom:3px solid var(--line);border-top:6px solid var(--cc);}
+/* Helper images are complete card fronts; show the whole image instead of zoom-cropping it. */
+.support-tile .sup-band img{width:100%;height:100%;object-fit:contain;object-position:center;padding:4px 0;background:transparent;}
 .support-tile .sup-art-kind{position:absolute;left:8px;bottom:7px;padding:4px 8px;border-radius:999px;background:rgba(255,255,255,.94);color:var(--kc);font-family:var(--font-display);font-size:.62rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;box-shadow:0 2px 6px rgba(0,0,0,.12);}
-.home-helper-grid .support-tile .sup-band{height:185px;}
+.home-helper-grid .support-tile .sup-band{height:205px;}
 .sup-kind{font-family:var(--font-display);font-weight:700;font-size:0.68rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px;}
 .origin-tag{display:flex;align-items:center;gap:4px;color:var(--cc);}
 .origin-tag svg{width:13px;height:13px;}
 .chip-list{display:flex;flex-direction:column;gap:6px;}
-.chip-pick{text-align:left;padding:8px 10px;border-radius:12px;border:2.5px solid transparent;background:var(--bg-soft);font-family:var(--font-display);font-size:0.8rem;font-weight:700;color:var(--ink-soft);}
+.chip-pick{display:block;width:100%;min-width:0;box-sizing:border-box;white-space:normal;overflow-wrap:break-word;line-height:1.35;text-align:left;padding:8px 10px;border-radius:12px;border:2.5px solid transparent;background:var(--bg-soft);font-family:var(--font-display);font-size:0.8rem;font-weight:700;color:var(--ink-soft);}
 .chip-pick small{display:block;font-family:var(--font-body);font-weight:600;color:var(--ink-faint);font-size:0.68rem;}
 .chip-pick[aria-pressed="true"]{border-color:var(--pounamu);background:var(--pounamu-light);color:var(--ink);}
 .origin-hint{font-size:0.72rem;color:var(--ink-faint);margin-top:8px;line-height:1.5;}
