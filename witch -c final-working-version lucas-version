@@ -1,0 +1,201 @@
+[1mdiff --git a/js/data.js b/js/data.js[m
+[1mindex 41e1802..ed6d95f 100644[m
+[1m--- a/js/data.js[m
+[1m+++ b/js/data.js[m
+[36m@@ -50,18 +50,10 @@[m [mconst ELEMENTS = {[m
+ };[m
+ [m
+ const TRAITS = {[m
+[31m-    adhd:       { label:"ADHD",                       color:"#ff6a3c", light:"#ffe1d3", icon:"tr-adhd" },[m
+[31m-    autism:     { label:"Autism",                     color:"#1fb6c9", light:"#d7f4f7", icon:"tr-autism" },[m
+[31m-    dyslexia:   { label:"Dyslexia",                   color:"#9a5cd6", light:"#ede1fa", icon:"tr-dyslexia" },[m
+[31m-    dyscalculia:{ label:"Dyscalculia",                color:"#e8a628", light:"#fdedc6", icon:"i-bulb" },[m
+[31m-    dyspraxia:  { label:"Dyspraxia",                  color:"#2688c2", light:"#dcf0fb", icon:"i-users" },[m
+[31m-    tourette:   { label:"Tourette syndrome",          color:"#7c5cff", light:"#ece6ff", icon:"i-star" },[m
+[31m-    trauma:     { label:"Transgenerational trauma",   color:"#4b4368", light:"#e6e3f0", icon:"i-shield" },[m
+[31m-    fasd:       { label:"FASD",                       color:"#c98812", light:"#fdedc6", icon:"i-calendar" },[m
+[31m-    abi:        { label:"Acquired brain injury",      color:"#2688c2", light:"#dcf0fb", icon:"i-info" },[m
+[31m-    nas:        { label:"Neonatal abstinence syndrome",color:"#1f7a54", light:"#d9f0e4", icon:"i-users" },[m
+[31m-    id:         { label:"Intellectual disability",    color:"#ff6a5c", light:"#ffe1dc", icon:"i-star" },[m
+[31m-    ln:         { label:"Learning needs",             color:"#6b5ca5", light:"#e9e4f7", icon:"i-book" },[m
+[32m+[m[32m    adhd:       { label:"ADHD",       color:"#ff6a3c", light:"#ffb094", icon:"tr-adhd" },[m
+[32m+[m[32m    autism:     { label:"Autism",     color:"#1fb6c9", light:"#8be3ec", icon:"tr-autism" },[m
+[32m+[m[32m    dyslexia:   { label:"Dyslexia",   color:"#9a5cd6", light:"#cfaeef", icon:"tr-dyslexia" },[m
+[32m+[m[32m    hyperfocus: { label:"Hyperfocus", color:"#e8a628", light:"#ffce6b", icon:"tr-hyperfocus" },[m
+ };[m
+ [m
+ const SUPERTYPES = {[m
+[36m@@ -340,16 +332,18 @@[m [mconst ORIGINS = {[m
+ };[m
+ const CONDITIONS = {[m
+     autism:{label:"Autism", teReo:"Takiwātanga", trait:"autism"}, adhd:{label:"ADHD", teReo:"Aroreretini", trait:"adhd"},[m
+[31m-    dyslexia:{label:"Dyslexia", teReo:"Tipaopao Kupu", trait:"dyslexia"}, tourette:{label:"Tourette Syndrome", trait:"tourette"},[m
+[31m-    trauma:{label:"Transgenerational trauma", teReo:"Wharanga Tuku Iho", trait:"trauma"}, dyscalculia:{label:"Dyscalculia", trait:"dyscalculia"}, dyspraxia:{label:"Dyspraxia", trait:"dyspraxia"},[m
+[31m-    fasd:{label:"FASD", teReo:"Kōpūtanga Waipiro", trait:"fasd"}, abi:{label:"Acquired brain injury", teReo:"Whara Roro", trait:"abi"},[m
+[31m-    nas:{label:"Neonatal abstinence syndrome", teReo:"Kōpūtanga Paitini Raau Taero", trait:"nas"},[m
+[31m-    id:{label:"Intellectual disability", trait:"id"}, ln:{label:"Learning needs", trait:"ln"},[m
+[32m+[m[32m    dyslexia:{label:"Dyslexia", teReo:"Tipaopao Kupu", trait:"dyslexia"}, tourette:{label:"Tourette Syndrome"},[m
+[32m+[m[32m    trauma:{label:"Transgenerational trauma", teReo:"Wharanga Tuku Iho"}, dyscalculia:{label:"Dyscalculia"}, dyspraxia:{label:"Dyspraxia"},[m
+[32m+[m[32m    fasd:{label:"FASD", teReo:"Kōpūtanga Waipiro"}, abi:{label:"Acquired brain injury", teReo:"Whara Roro"},[m
+[32m+[m[32m    nas:{label:"Neonatal abstinence syndrome", teReo:"Kōpūtanga Paitini Raau Taero"},[m
+[32m+[m[32m    lead:{label:"Lead-induced neurotoxicity", teReo:"Pāpāngia e te Paitini"}, iodine:{label:"Congenital iodine deficiency", teReo:"He kore tūtohu tūāuri"},[m
+ };[m
+ const ENV_META = {[m
+     fasd:{cause:"Prenatal alcohol exposure", adapted:"Adapted from FASD-CAN NZ and Parsonson references."},[m
+     abi:{cause:"Birth hypoxia", adapted:"Adapted from Nationwide Children’s Hospital and NINDS references."},[m
+     nas:{cause:"Prenatal substance exposure", adapted:"Adapted from Starship Children’s Health and NSW Health references."},[m
+[32m+[m[32m    lead:{cause:"Lead exposure", adapted:"Adapted from CDC and NIH references."},[m
+[32m+[m[32m    iodine:{cause:"Maternal iodine deficiency", adapted:"Adapted from WHO and Healthdirect Australia references."},[m
+ };[m
+ const SUPPORT_REFS = {[m
+     epigenetic:{[m
+[36m@@ -386,7 +380,7 @@[m [mconst _K = {a:"accommodation", f:"affirmation", t:"task"};[m
+ let _n = 0;[m
+ function _mk(origin, rows){[m
+     return rows.map(([condition,k,code,conditionLabel,title,text,extra])=>{[m
+[31m-        const kind=_K[k], m=origin==="environmental"?(ENV_META[condition]||{}):{};[m
+[32m+[m[32m        const kind=_K[k], m=origin==="environmental"?ENV_META[condition]:{};[m
+         return { id:`${origin}-${condition}-${kind}`, family:"support", number:++_n, origin, condition, kind, code, conditionLabel,[m
+             title:title||null, text, extra:extra||null, cause:m.cause||null, adapted:m.adapted||null, name:title||conditionLabel };[m
+     });[m
+[36m@@ -437,113 +431,14 @@[m [mconst SUPPORT_CARDS = [[m
+         ["nas","a","07 / 15","Neonatal Abstinence Syndrome / Kōpūtanga Paitini Raau Taero","","Provide low-sensory zones with noise-canceling headphones and dimmed lighting to reduce overwhelm."],[m
+         ["nas","f","08 / 15","Neonatal Abstinence Syndrome / Kōpūtanga Paitini Raau Taero","","You notice subtle changes in your environment with incredible intuition, and that awareness can be a valuable strength."],[m
+         ["nas","t","09 / 15","Neonatal Abstinence Syndrome / Kōpūtanga Paitini Raau Taero","","Find a quiet space, put on headphones, and complete one small task before moving back into a louder environment."],[m
+[31m-        ["ln","a","10 / 15","Learning Needs","","Use movement breaks and heavy-work activities to help regulate the nervous system and reduce irritability."],[m
+[31m-        ["ln","f","11 / 15","Learning Needs","","You have a natural aptitude for hands-on, mechanical, and physical tasks that can be developed with practice."],[m
+[31m-        ["ln","t","12 / 15","Learning Needs","","Choose a hands-on task, carry a weighted object while working, and take a short movement break before continuing."],[m
+[31m-        ["id","a","13 / 15","Intellectual Disability","","Break tasks into literal, concrete steps with physical examples so the brain can follow dependable routines."],[m
+[31m-        ["id","f","14 / 15","Intellectual Disability","","You are reliable and consistent when following established routines and procedures, and that dependability matters."],[m
+[31m-        ["id","t","15 / 15","Intellectual Disability","","Take a complex task, break it into three literal steps, and complete one step at a time using a physical example."],[m
+[32m+[m[32m        ["lead","a","10 / 15","Lead-Induced Neurotoxicity / Pāpāngia e te Paitini","","Use movement breaks and heavy-work activities to help regulate the nervous system and reduce irritability."],[m
+[32m+[m[32m        ["lead","f","11 / 15","Lead-Induced Neurotoxicity / Pāpāngia e te Paitini","","You have a natural aptitude for hands-on, mechanical, and physical tasks that can be developed with practice."],[m
+[32m+[m[32m        ["lead","t","12 / 15","Lead-Induced Neurotoxicity / Pāpāngia e te Paitini","","Choose a hands-on task, carry a weighted object while working, and take a short movement break before continuing."],[m
+[32m+[m[32m        ["iodine","a","13 / 15","Congenital Iodine Deficiency Syndrome / He kore tūtohu tūāuri","","Break tasks into literal, concrete steps with physical examples so the brain can follow dependable routines."],[m
+[32m+[m[32m        ["iodine","f","14 / 15","Congenital Iodine Deficiency Syndrome / He kore tūtohu tūāuri","","You are reliable and consistent when following established routines and procedures, and that dependability matters."],[m
+[32m+[m[32m        ["iodine","t","15 / 15","Congenital Iodine Deficiency Syndrome / He kore tūtohu tūāuri","","Take a complex task, break it into three literal steps, and complete one step at a time using a physical example."],[m
+     ]),[m
+ ];[m
+[31m-[m
+[31m-// ---------------------------------------------------------------------[m
+[31m-// ILLUSTRATED ATUA SET[m
+[31m-// Keep the non-Atua game cards (Tūpuna, Kotahi and Mana), but do not invent[m
+[31m-// extra Atua entries without artwork. The supplied illustration files are[m
+[31m-// the source of truth for this illustrated set.[m
+[31m-// ---------------------------------------------------------------------[m
+[31m-const _rawCard = id => CARDS.find(c => c.id === id);[m
+[31m-for (let i = CARDS.length - 1; i >= 0; i--) {[m
+[31m-    if (["ranginui", "papatuanuku"].includes(CARDS[i].id)) CARDS.splice(i, 1);[m
+[31m-}[m
+[31m-const _maui = _rawCard("maui");[m
+[31m-_maui.trait = "dyscalculia";[m
+[31m-_maui.epithet = "The Trickster Demigod";[m
+[31m-_maui.art = { type:"image", src:"maui" };[m
+[31m-_maui.accommodations = [[m
+[31m-    "Visual maths tools, manipulatives and calculators",[m
+[31m-    "Clear examples for each step",[m
+[31m-    "Extra time to work through number problems",[m
+[31m-    "A chance to explain a different way to solve a problem"[m
+[31m-];[m
+[31m-_maui.abilities = [[m
+[31m-    { kind:"gift", name:"Creative Number Sense", text:"Finds inventive ways to solve problems, especially when ideas can be seen or handled." },[m
+[31m-    { kind:"help", name:"Visual Maths Tools", text:"Pictures, counters and worked examples make number patterns easier to explore." },[m
+[31m-    { kind:"challenge", name:"Numbers Take Practice", text:"Mental calculations and number sequences can take more time and effort." },[m
+[31m-];[m
+[31m-_maui.story = "Māui is known for clever plans and trying a different way when the first idea does not work. This card celebrates creative problem-solving and the value of visual, hands-on ways to explore numbers.";[m
+[31m-_maui.gameTip = "Look for patterns and use a visual plan before choosing your next move.";[m
+[31m-[m
+[31m-for (const [id, trait, src] of [[m
+[31m-    ["tanemahuta", "nas", "tanemahuta"],[m
+[31m-    ["tangaroa", "abi", "tangaroa"],[m
+[31m-    ["ruaumoko", "tourette", "ruaumoko"],[m
+[31m-    ["hinenuitepo", "trauma", "hinenuitepo"],[m
+[31m-]) {[m
+[31m-    const c = _rawCard(id);[m
+[31m-    if (c) { c.trait = trait; c.art = { type:"image", src }; }[m
+[31m-}[m
+[31m-[m
+[31m-const _mauiDyspraxia = {[m
+[31m-    id:"maui-dyspraxia", number:20, supertype:"atua", set:"te-ao-marama",[m
+[31m-    name:"Māui-tikitiki-a-Taranga", epithet:"The Trickster Demigod · Dyspraxia",[m
+[31m-    trait:"dyspraxia", elements:["kowhai","ahi"], mana:8, rarity:"rare",[m
+[31m-    art:{type:"image", src:"mauiDyspraxia"},[m
+[31m-    abilities:[[m
+[31m-        {kind:"gift", name:"Hands-On Ingenuity", text:"Finds creative ways around a problem and keeps trying when a plan needs changing."},[m
+[31m-        {kind:"help", name:"Steps That Stick", text:"A clear demonstration and a little practice make a new sequence easier to follow."},[m
+[31m-        {kind:"challenge", name:"Coordination Takes Time", text:"Planning and coordinating movements can take extra effort, especially when rushed."},[m
+[31m-    ],[m
+[31m-    accommodations:["Break movement tasks into small steps", "Show a demonstration before asking for a new skill", "Allow extra time for writing and practical tasks", "Offer tools that reduce physical effort"],[m
+[31m-    story:"This version of Māui celebrates persistence, practical creativity and finding another route when a task is difficult. A different pace or approach can still lead to a brilliant result.",[m
+[31m-    gameTip:"Try a step-by-step plan and build momentum one move at a time."[m
+[31m-};[m
+[31m-const _rongo = {[m
+[31m-    id:"rongo", number:21, supertype:"atua", set:"te-ao-marama",[m
+[31m-    name:"Rongo", epithet:"Atua of Peace and Cultivated Foods",[m
+[31m-    trait:"id", elements:["kowhai","wai"], mana:7, rarity:"rare",[m
+[31m-    art:{type:"image", src:"rongo"},[m
+[31m-    abilities:[[m
+[31m-        {kind:"gift", name:"Steady Practice", text:"Builds confidence through familiar routines and meaningful, hands-on activities."},[m
+[31m-        {kind:"help", name:"Clear Real-Life Examples", text:"Concrete examples and one step at a time make a new task easier to understand."},[m
+[31m-        {kind:"challenge", name:"New Steps Need Time", text:"A new or abstract task may take more time, repetition and support to learn."},[m
+[31m-    ],[m
+[31m-    accommodations:["Use real-life examples and familiar materials", "Give one clear instruction at a time", "Allow repetition and practice", "Celebrate progress and effort"],[m
+[31m-    story:"Rongo is associated with peace and cultivated foods. This card focuses on patient learning, practical examples and the value of routines that help people feel confident.",[m
+[31m-    gameTip:"Build a reliable plan using familiar actions before adding something new."[m
+[31m-};[m
+[31m-const _tawhaki = {[m
+[31m-    id:"tawhaki", number:22, supertype:"atua", set:"te-ao-marama",[m
+[31m-    name:"Tāwhaki", epithet:"The Sky-Climbing Hero",[m
+[31m-    trait:"fasd", elements:["hiko","kowhai"], mana:8, rarity:"legendary",[m
+[31m-    art:{type:"image", src:"tawhaki"},[m
+[31m-    abilities:[[m
+[31m-        {kind:"gift", name:"Creative Spark", text:"Brings imagination and spontaneous ideas to the challenge in front of him."},[m
+[31m-        {kind:"help", name:"Visible Checkpoints", text:"Pictures, checklists and a trusted guide help keep each next step clear."},[m
+[31m-        {kind:"challenge", name:"Many Steps at Once", text:"Planning, remembering and finishing a multi-step task can take extra support."},[m
+[31m-    ],[m
+[31m-    accommodations:["Use visual checklists", "Break tasks into a few concrete steps", "Check in with a trusted support person", "Keep important routines consistent"],[m
+[31m-    story:"Tāwhaki is remembered in stories of an extraordinary journey skyward. This card highlights imagination and persistence, with practical supports to make a big journey feel manageable.",[m
+[31m-    gameTip:"Set visible checkpoints and work towards one goal at a time."[m
+[31m-};[m
+[31m-const _tumatauenga = {[m
+[31m-    id:"tumatauenga", number:23, supertype:"atua", set:"te-ao-marama",[m
+[31m-    name:"Tūmatauenga", epithet:"Atua of People and Conflict",[m
+[31m-    trait:"ln", elements:["ahi","hiko"], mana:8, rarity:"rare",[m
+[31m-    art:{type:"image", src:"tumatauenga"},[m
+[31m-    abilities:[[m
+[31m-        {kind:"gift", name:"Practical Problem-Solving", text:"Can learn through doing, clear examples and tasks with a meaningful purpose."},[m
+[31m-        {kind:"help", name:"One Step at a Time", text:"A calm pace and a simple sequence make it easier to work out what comes next."},[m
+[31m-        {kind:"challenge", name:"Processing Takes Time", text:"Too many instructions at once can make it harder to remember the next step."},[m
+[31m-    ],[m
+[31m-    accommodations:["Use clear, concrete instructions", "Show an example of the finished task", "Break a task into small steps", "Allow extra time and check understanding"],[m
+[31m-    story:"Tūmatauenga is an important figure in Māori traditions. This card is designed around practical learning, clear instructions and the idea that people can succeed in different ways.",[m
+[31m-    gameTip:"Keep the plan visible and focus on the next clear action."[m
+[31m-};[m
+[31m-const _firstTupuna = CARDS.findIndex(c => c.supertype === "tupuna");[m
+[31m-CARDS.splice(_firstTupuna < 0 ? CARDS.length : _firstTupuna, 0, _mauiDyspraxia, _rongo, _tawhaki, _tumatauenga);[m
+[31m-CARDS.forEach((c, i) => { c.number = i + 1; });[m
+[31m-[m
+ CARDS.forEach(c=>{ c.family="atua"; });[m
+ const ALL_CARDS = [...CARDS, ...SUPPORT_CARDS];[m
+ [m
+[36m@@ -551,13 +446,13 @@[m [mconst IMAGES = {[m
+     tawhirimatea: "assets/images/tawhirimatea_god_adhd.png",[m
+     hinemoana: "assets/images/hinemoana_god_asd.png",[m
+     mahuika: "assets/images/mahuika_god_dyslexia.png",[m
+[31m-    maui: "assets/images/maui_dyscalculia_god.png",[m
+[31m-    mauiDyspraxia: "assets/images/maui_dyspraxia_god.png",[m
+[31m-    rongo: "assets/images/rongo_id_god.png",[m
+[31m-    ruaumoko: "assets/images/ruaumoko_tour_god.png",[m
+[31m-    tanemahuta: "assets/images/tanemahuta_nas_god.png",[m
+[31m-    tangaroa: "assets/images/tangaroa_tbi_god.png",[m
+     hinenuitepo: "assets/images/hinenuitepo_god_trauma.png",[m
+[32m+[m[32m    ruaumoko: "assets/images/ruaumoko_tour_god.png",[m
+     tawhaki: "assets/images/tawhaki_fasd_god.png",[m
+[32m+[m[32m    tangaroa: "assets/images/tangaroa_tbi_god.png",[m
+[32m+[m[32m    tanemahuta: "assets/images/tanemahuta_nas_god.png",[m
+     tumatauenga: "assets/images/tumatauenga_ln_god.png",[m
+[32m+[m[32m    rongo: "assets/images/rongo_id_god.png",[m
+[32m+[m[32m    mauiDyscalculia: "assets/images/maui_dyscalculia_god.png",[m
+[32m+[m[32m    mauiDyspraxia: "assets/images/maui_dyspraxia_god.png"[m
+ };[m
+\ No newline at end of file[m

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="53403607-5948-4a4b-94b6-636ee8c5142f" name="Changes" comment="Fixed typo error">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/data.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/search-filter.test.js" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;yath4rth&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/LucasMcKinney/AtuaTCG.git&quot;,
+    &quot;accountId&quot;: &quot;66c9b5a2-abd1-4880-b15e-fdc7d4287f3a&quot;
+  }
+}</component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.5070288713527562" />
+      <entry key="MS500" value="3.7884872858700267" />
+      <entry key="S2" value="8.11567555170499" />
+      <entry key="S5" value="10.145998704786235" />
+      <entry key="S10" value="11.011071967807919" />
+      <entry key="S30" value="11.655205142283187" />
+      <entry key="S60" value="11.825612755439225" />
+      <entry key="M2" value="11.912301374309564" />
+      <entry key="M5" value="11.964856111414443" />
+      <entry key="M10" value="12.026960832636403" />
+      <entry key="M15" value="12.460886457684163" />
+      <entry key="M30" value="18.5501911761218" />
+      <entry key="H1" value="40.86937976519549" />
+      <entry key="H2" value="75.52697221695423" />
+      <entry key="H4" value="107.30591831875061" />
+      <entry key="D1" value="146.3636947625799" />
+      <entry key="W1" value="154.58055664269648" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="2.1998717556608955E-289" />
+      <entry key="S30" value="6.036693433487695E-97" />
+      <entry key="S60" value="7.769616099581557E-49" />
+      <entry key="M2" value="8.814542585739526E-25" />
+      <entry key="M5" value="2.3882506912932985E-10" />
+      <entry key="M10" value="1.545396612942226E-5" />
+      <entry key="M15" value="6.204307353088864E-4" />
+      <entry key="M30" value="0.024908447067388373" />
+      <entry key="H1" value="0.15782410166824454" />
+      <entry key="H2" value="0.39727081653230495" />
+      <entry key="H4" value="0.6302942301277265" />
+      <entry key="D1" value="0.925956437253239" />
+      <entry key="W1" value="0.9890704393808503" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="1.402778608161439" />
+      <entry key="MS500" value="3.7000550983041043" />
+      <entry key="S2" value="8.04728156100521" />
+      <entry key="S5" value="10.10993722448835" />
+      <entry key="S10" value="10.99122114871331" />
+      <entry key="S30" value="11.648141396366173" />
+      <entry key="S60" value="11.822022139263582" />
+      <entry key="M2" value="11.910491153421173" />
+      <entry key="M5" value="11.964128402661721" />
+      <entry key="M10" value="12.026606095167761" />
+      <entry key="M15" value="12.461219608597586" />
+      <entry key="M30" value="18.57461405758472" />
+      <entry key="H1" value="41.026226510962076" />
+      <entry key="H2" value="75.92312779540629" />
+      <entry key="H4" value="107.93535318815196" />
+      <entry key="D1" value="147.28944421379046" />
+      <entry key="W1" value="155.5695955663176" />
+    </decayedShown>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3Kx1XBVg9S6OFREZfKfe5M5cjmP" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "final-working-version",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/yatharth/Documents/GitHub/AtuaTCG/js",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.jshint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.jshint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
+    "to.speed.mode.migration.done": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\yatharth\Documents\GitHub\AtuaTCG\js" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="extract_images" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="AtuaTCG" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/js" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/js/extract_images.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-a203e0a19954-intellij.indexing.shared.core-IU-262.10968.63" />
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-IU-262.10968.63" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="53403607-5948-4a4b-94b6-636ee8c5142f" name="Changes" comment="" />
+      <created>1792484461478</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1792484461478</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Restructure project into separate files" />
+    <MESSAGE value="Update image assets and upload card designs - 1" />
+    <MESSAGE value="Update image assets" />
+    <MESSAGE value="Add automated card data and image tests" />
+    <MESSAGE value="Add automated search and filtering tests" />
+    <MESSAGE value="Add automated tests for card filters" />
+    <MESSAGE value="Fixed typo error" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed typo error" />
+  </component>
+</project>
