@@ -446,4 +446,13 @@ const IMAGES = {
     tawhirimatea: "assets/images/tawhirimatea_god_adhd.png",
     hinemoana: "assets/images/hinemoana_god_asd.png",
     mahuika: "assets/images/mahuika_god_dyslexia.png",
+    hinenuitepo: "assets/images/hinenuitepo_god_trauma.png",
+    ruaumoko: "assets/images/ruaumoko_tour_god.png",
+    tawhaki: "assets/images/tawhaki_fasd_god.png",
+    tangaroa: "assets/images/tangaroa_tbi_god.png",
+    tanemahuta: "assets/images/tanemahuta_nas_god.png",
+    tumatauenga: "assets/images/tumatauenga_ln_god.png",
+    rongo: "assets/images/rongo_id_god.png",
+    mauiDyscalculia: "assets/images/maui_dyscalculia_god.png",
+    mauiDyspraxia: "assets/images/maui_dyspraxia_god.png"
 };
