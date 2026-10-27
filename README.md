@@ -22,19 +22,18 @@ A kid-friendly card explorer for **Atua TCG**, a trading card game that pairs th
 2. Download then open `index.html` in a modern browser, or
 3. Host it on Vercel, Netlify, etc.
 
-## How the file is organised
+## File organisation
 
-Inside the HTML file, in order:
-
-| Section | What it holds |
+| File | What it holds |
 | --- | --- |
-| `<style>` | Design tokens and all styling |
-| SVG sprite | Every icon (elements, traits, card kinds, origins, UI) |
-| Markup | Four views (Home, Cards, Rules, About), plus the card modal |
-| Script 1 | Atua card data, elements, traits, translations, helper card data, embedded art |
-| Script 2 | Hash router, filtering, rendering, modal logic |
-
-Routes are hash-based: `#/`, `#/cards`, `#/rules`, `#/about`. Card details open in a modal rather than a separate page, so filters and scroll position are kept.
+| index.html | Home page and featured card previews |
+| cards.html | Atua and helper card browser, filters, and card detail modal |
+| rules.html | Game rules |
+| about.html | About and project notes |
+| css/styles.css | Shared responsive styling |
+| js/data.js | Atua and helper card data, plus image mappings |
+| js/app.js | Shared navigation, filtering, rendering, and detail interactions |
+| assets/images/ | Supplied Atua art and accommodation, affirmation, and task card artwork |
 
 ## Adding or editing cards
 
