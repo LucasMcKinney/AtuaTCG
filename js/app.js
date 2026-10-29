@@ -44,10 +44,17 @@ function icon(sym){ return `<svg class="icon"><use href="#${sym}"/></svg>`; }
 // ---------------------------------------------------------------------
 // ACCENT / VISUAL HELPERS
 // ---------------------------------------------------------------------
-function accentFor(card){
-    if(card.trait){ const tr = TRAITS[card.trait]; return { c:tr.color, l:tr.light }; }
-    const e = ELEMENTS[card.elements[0]];
-    return { c:e.color, l:e.light };
+function accentFor(card) {
+    if (card.trait) {
+        const tr = TRAITS[card.trait];
+        if (tr) return { c: tr.color, l: tr.light };
+    }
+
+    const element = card.elements && ELEMENTS[card.elements[0]];
+    if (element) return { c: element.color, l: element.light };
+
+    // Safe fallback when card data has no matching colour.
+    return { c: "#47796b", l: "#e0eee8" };
 }
 function elementChip(key, size){
     const e = ELEMENTS[key];
@@ -716,10 +723,11 @@ function renderRules(){
 // ---------------------------------------------------------------------
 function renderAbout(){
     const team = [
-        { role:"Art Direction", note:"Illustration & visual design" },
-        { role:"Cultural Advisor", note:"Te reo Māori & tikanga review" },
-        { role:"Cultural Advisor", note:"Te reo Māori & tikanga review" },
-        { role:"Game Design", note:"Rules & card mechanics" },
+        { role:"Dr. Tony Clear", note:"Supervisor and mentor" },
+        { role:"Dr. Hazel Abraham", note:"Te reo Māori & tikanga review" },
+        { role:"Anthony Rawlinson", note:"Rules & card mechanics, Back-end Developer" },
+        { role:"Lucas McKinney", note:"Data analyst and ontology architect, Full-stack Developer" },
+        { role:"Yatharth Haldar", note:"Art direction and website designer, Front-end Developer" },
     ];
     const teamHtml = team.map(m=>`
     <div class="team-card">
