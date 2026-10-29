@@ -148,7 +148,7 @@ const CARDS = [
         id:"maui", number:4, supertype:"atua", set:"te-ao-marama",
         name:"Māui-tikitiki-a-Taranga", epithet:"The Trickster Demigod",
         trait:"hyperfocus", elements:["kowhai","ahi"], mana:9, rarity:"legendary",
-        art:{ type:"symbolic", domain:"kowhai" },
+        art:{ type:"image", src:"mauiDyspraxia" },
         abilities:[
             { kind:"gift", name:"Deep Dive Drive", text:"Once locked on, he can work for hours on one big idea without stopping." },
             { kind:"help", name:"Flow Anchor", text:"Doing one thing at a time, somewhere calm, helps the focus last." },
@@ -439,6 +439,104 @@ const SUPPORT_CARDS = [
         ["iodine","t","15 / 15","Congenital Iodine Deficiency Syndrome / He kore tūtohu tūāuri","","Take a complex task, break it into three literal steps, and complete one step at a time using a physical example."],
     ]),
 ];
+
+// ---------------------------------------------------------------------
+// ILLUSTRATED ATUA SET
+// Keep the non-Atua game cards (Tūpuna, Kotahi and Mana), but do not invent
+// extra Atua entries without artwork. The supplied illustration files are
+// the source of truth for this illustrated set.
+// ---------------------------------------------------------------------
+const _rawCard = id => CARDS.find(c => c.id === id);
+for (let i = CARDS.length - 1; i >= 0; i--) {
+    if (["ranginui", "papatuanuku"].includes(CARDS[i].id)) CARDS.splice(i, 1);
+}
+const _maui = _rawCard("maui");
+_maui.trait = "dyscalculia";
+_maui.epithet = "The Trickster Demigod";
+_maui.art = { type:"image", src:"mauiDyscalculia" };
+_maui.accommodations = [
+    "Visual maths tools, manipulatives and calculators",
+    "Clear examples for each step",
+    "Extra time to work through number problems",
+    "A chance to explain a different way to solve a problem"
+];
+_maui.abilities = [
+    { kind:"gift", name:"Creative Number Sense", text:"Finds inventive ways to solve problems, especially when ideas can be seen or handled." },
+    { kind:"help", name:"Visual Maths Tools", text:"Pictures, counters and worked examples make number patterns easier to explore." },
+    { kind:"challenge", name:"Numbers Take Practice", text:"Mental calculations and number sequences can take more time and effort." },
+];
+_maui.story = "Māui is known for clever plans and trying a different way when the first idea does not work. This card celebrates creative problem-solving and the value of visual, hands-on ways to explore numbers.";
+_maui.gameTip = "Look for patterns and use a visual plan before choosing your next move.";
+
+for (const [id, trait, src] of [
+    ["tanemahuta", "nas", "tanemahuta"],
+    ["tangaroa", "abi", "tangaroa"],
+    ["ruaumoko", "tourette", "ruaumoko"],
+    ["hinenuitepo", "trauma", "hinenuitepo"],
+]) {
+    const c = _rawCard(id);
+    if (c) { c.trait = trait; c.art = { type:"image", src }; }
+}
+
+const _mauiDyspraxia = {
+    id:"maui-dyspraxia", number:20, supertype:"atua", set:"te-ao-marama",
+    name:"Māui-tikitiki-a-Taranga", epithet:"The Trickster Demigod · Dyspraxia",
+    trait:"dyspraxia", elements:["kowhai","ahi"], mana:8, rarity:"rare",
+    art:{type:"image", src:"mauiDyspraxia"},
+    abilities:[
+        {kind:"gift", name:"Hands-On Ingenuity", text:"Finds creative ways around a problem and keeps trying when a plan needs changing."},
+        {kind:"help", name:"Steps That Stick", text:"A clear demonstration and a little practice make a new sequence easier to follow."},
+        {kind:"challenge", name:"Coordination Takes Time", text:"Planning and coordinating movements can take extra effort, especially when rushed."},
+    ],
+    accommodations:["Break movement tasks into small steps", "Show a demonstration before asking for a new skill", "Allow extra time for writing and practical tasks", "Offer tools that reduce physical effort"],
+    story:"This version of Māui celebrates persistence, practical creativity and finding another route when a task is difficult. A different pace or approach can still lead to a brilliant result.",
+    gameTip:"Try a step-by-step plan and build momentum one move at a time."
+};
+const _rongo = {
+    id:"rongo", number:21, supertype:"atua", set:"te-ao-marama",
+    name:"Rongo", epithet:"Atua of Peace and Cultivated Foods",
+    trait:"id", elements:["kowhai","wai"], mana:7, rarity:"rare",
+    art:{type:"image", src:"rongo"},
+    abilities:[
+        {kind:"gift", name:"Steady Practice", text:"Builds confidence through familiar routines and meaningful, hands-on activities."},
+        {kind:"help", name:"Clear Real-Life Examples", text:"Concrete examples and one step at a time make a new task easier to understand."},
+        {kind:"challenge", name:"New Steps Need Time", text:"A new or abstract task may take more time, repetition and support to learn."},
+    ],
+    accommodations:["Use real-life examples and familiar materials", "Give one clear instruction at a time", "Allow repetition and practice", "Celebrate progress and effort"],
+    story:"Rongo is associated with peace and cultivated foods. This card focuses on patient learning, practical examples and the value of routines that help people feel confident.",
+    gameTip:"Build a reliable plan using familiar actions before adding something new."
+};
+const _tawhaki = {
+    id:"tawhaki", number:22, supertype:"atua", set:"te-ao-marama",
+    name:"Tāwhaki", epithet:"The Sky-Climbing Hero",
+    trait:"fasd", elements:["hiko","kowhai"], mana:8, rarity:"legendary",
+    art:{type:"image", src:"tawhaki"},
+    abilities:[
+        {kind:"gift", name:"Creative Spark", text:"Brings imagination and spontaneous ideas to the challenge in front of him."},
+        {kind:"help", name:"Visible Checkpoints", text:"Pictures, checklists and a trusted guide help keep each next step clear."},
+        {kind:"challenge", name:"Many Steps at Once", text:"Planning, remembering and finishing a multi-step task can take extra support."},
+    ],
+    accommodations:["Use visual checklists", "Break tasks into a few concrete steps", "Check in with a trusted support person", "Keep important routines consistent"],
+    story:"Tāwhaki is remembered in stories of an extraordinary journey skyward. This card highlights imagination and persistence, with practical supports to make a big journey feel manageable.",
+    gameTip:"Set visible checkpoints and work towards one goal at a time."
+};
+const _tumatauenga = {
+    id:"tumatauenga", number:23, supertype:"atua", set:"te-ao-marama",
+    name:"Tūmatauenga", epithet:"Atua of People and Conflict",
+    trait:"ln", elements:["ahi","hiko"], mana:8, rarity:"rare",
+    art:{type:"image", src:"tumatauenga"},
+    abilities:[
+        {kind:"gift", name:"Practical Problem-Solving", text:"Can learn through doing, clear examples and tasks with a meaningful purpose."},
+        {kind:"help", name:"One Step at a Time", text:"A calm pace and a simple sequence make it easier to work out what comes next."},
+        {kind:"challenge", name:"Processing Takes Time", text:"Too many instructions at once can make it harder to remember the next step."},
+    ],
+    accommodations:["Use clear, concrete instructions", "Show an example of the finished task", "Break a task into small steps", "Allow extra time and check understanding"],
+    story:"Tūmatauenga is an important figure in Māori traditions. This card is designed around practical learning, clear instructions and the idea that people can succeed in different ways.",
+    gameTip:"Keep the plan visible and focus on the next clear action."
+};
+const _firstTupuna = CARDS.findIndex(c => c.supertype === "tupuna");
+CARDS.splice(_firstTupuna < 0 ? CARDS.length : _firstTupuna, 0, _mauiDyspraxia, _rongo, _tawhaki, _tumatauenga);
+CARDS.forEach((c, i) => { c.number = i + 1; });
 CARDS.forEach(c=>{ c.family="atua"; });
 const ALL_CARDS = [...CARDS, ...SUPPORT_CARDS];
 
