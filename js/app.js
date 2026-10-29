@@ -287,9 +287,9 @@ function renderHome(){
     ].filter(Boolean);
     renderGrid(helperPreview, document.getElementById("homeHelperPreview"));
 
-    const heroCards = ["tawhirimatea", "mahuika", "maui"].map(cardById).filter(Boolean);
+    const heroCards = ["maui", "hinemoana", "tangaroa"].map(cardById).filter(Boolean);
     const heroWrap = document.getElementById("homeHeroCards");
-    if(heroWrap) heroWrap.innerHTML = heroCards.map(c => `<button class="home-art-card" data-card="${c.id}" aria-label="Explore ${c.name}">${artHtml(c)}<span>${c.name}</span></button>`).join("");
+    if(heroWrap) heroWrap.innerHTML = heroCards.map(c => `<button class="home-art-card" data-card="${c.id}" aria-label="Explore $">${artHtml(c)}</button>`).join("");
 }
 // home quick-filter links: clicking a type/element card jumps to Cards page pre-filtered
 document.addEventListener("click", (e)=>{
