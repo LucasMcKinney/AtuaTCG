@@ -50,10 +50,18 @@ const ELEMENTS = {
 };
 
 const TRAITS = {
-    adhd:       { label:"ADHD",       color:"#ff6a3c", light:"#ffb094", icon:"tr-adhd" },
-    autism:     { label:"Autism",     color:"#1fb6c9", light:"#8be3ec", icon:"tr-autism" },
-    dyslexia:   { label:"Dyslexia",   color:"#9a5cd6", light:"#cfaeef", icon:"tr-dyslexia" },
-    hyperfocus: { label:"Hyperfocus", color:"#e8a628", light:"#ffce6b", icon:"tr-hyperfocus" },
+    adhd:       { label:"ADHD",                       color:"#ff6a3c", light:"#ffe1d3", icon:"tr-adhd" },
+    autism:     { label:"Autism",                     color:"#1fb6c9", light:"#d7f4f7", icon:"tr-autism" },
+    dyslexia:   { label:"Dyslexia",                   color:"#9a5cd6", light:"#ede1fa", icon:"tr-dyslexia" },
+    dyscalculia:{ label:"Dyscalculia",                color:"#e8a628", light:"#fdedc6", icon:"i-bulb" },
+    dyspraxia:  { label:"Dyspraxia",                  color:"#2688c2", light:"#dcf0fb", icon:"i-users" },
+    tourette:   { label:"Tourette syndrome",          color:"#7c5cff", light:"#ece6ff", icon:"i-star" },
+    trauma:     { label:"Transgenerational trauma",   color:"#4b4368", light:"#e6e3f0", icon:"i-shield" },
+    fasd:       { label:"FASD",                       color:"#c98812", light:"#fdedc6", icon:"i-calendar" },
+    abi:        { label:"Acquired brain injury",      color:"#2688c2", light:"#dcf0fb", icon:"i-info" },
+    nas:        { label:"Neonatal abstinence syndrome",color:"#1f7a54", light:"#d9f0e4", icon:"i-users" },
+    id:         { label:"Intellectual disability",    color:"#ff6a5c", light:"#ffe1dc", icon:"i-star" },
+    ln:         { label:"Learning needs",             color:"#6b5ca5", light:"#e9e4f7", icon:"i-book" },
 };
 
 const SUPERTYPES = {
