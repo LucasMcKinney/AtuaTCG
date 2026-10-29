@@ -242,11 +242,15 @@ function renderHome(){
     document.getElementById("btnLearnRules").innerHTML = `${icon("i-book")}${t("learn_rules")}`;
 
     const traitStrip = document.getElementById("homeTraitStrip");
-    traitStrip.innerHTML = Object.entries(TRAITS).map(([key,tr])=>{
-        const card = CARDS.find(c=>c.trait===key);
+    traitStrip.innerHTML = Object.entries(TRAITS).map(([key, tr]) => {
+        const card = CARDS.find(c => c.trait === key);
+
+        // Skip traits that don't have a matching card.
+        if (!card) return "";
+
         return `<button class="trait-card" style="--tc:${tr.color};--tc-l:${tr.light}" data-card="${card.id}">
-      <div class="badge-icon">${icon(tr.icon)}</div>
-      <b>${tr.label}</b><span>${card.name}</span>
+        <div class="badge-icon">${icon(tr.icon)}</div>
+        <b>${tr.label}</b><span>${card.name}</span>
     </button>`;
     }).join("");
 
