@@ -184,13 +184,30 @@ function sortCards(list){
 // ---------------------------------------------------------------------
 // CARD TILE
 // ---------------------------------------------------------------------
+
+
 function supportArtPath(c){
-    const aliases = { autism:"asd", tourette:"tour", abi:"tbi" };
+    const aliases = {
+        autism: "asd",
+        tourette: "tour",
+        abi: "tbi",
+        lead: "id",
+        iodine: "ln"
+    };
+
     const condition = aliases[c.condition] || c.condition;
-    const prefix = { accommodation:"acco", affirmation:"affirm", task:"task" }[c.kind];
-    const hasVariant = c.origin === "epigenetic" && ["adhd", "autism", "dyslexia"].includes(c.condition);
+    const prefix = {
+        accommodation: "acco",
+        affirmation: "affirm",
+        task: "task"
+    }[c.kind];
+
+    const hasVariant = c.origin === "epigenetic" &&
+        ["adhd", "autism", "dyslexia"].includes(c.condition);
+
     return `assets/images/${prefix}${hasVariant ? "2" : ""}_${condition}.png`;
 }
+
 function supportTileHtml(c){
     const k = KINDS[c.kind], o = ORIGINS[c.origin];
     const main = c.title || c.conditionLabel, sub = c.title ? c.conditionLabel : "";
