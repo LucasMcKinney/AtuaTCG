@@ -19,7 +19,7 @@ A kid-friendly card explorer for **Atua TCG**, a trading card game that pairs th
 ## Running it
 
 1. Go to https://lucasmckinney.github.io/AtuaTCG or
-2. Download then open `index.html` in a modern browser, or
+2. Download then open `pages/index.html` in a modern browser, or
 3. Host it on Vercel, Netlify, etc.
 
 ## File organisation

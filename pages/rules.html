@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>Atua TCG — Home</title>
+  <title>Atua TCG — Game Rules</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
 
@@ -100,50 +100,9 @@
 
 <main class="wrap" style="padding:0;">
 
-  <!-- ============ HOME ============ -->
-  <section class="view" id="view-home">
-    <div class="hero">
-      <div class="hero-inner">
-        <h1 id="homeTitle">Every Atua has <em>a gift.</em></h1>
-        <p id="homeSub">Meet the gods of Māori stories — and see how their strengths, needs, and challenges are a bit like ours.</p>
-        <div class="hero-actions">
-          <a href="cards.html" class="btn btn-primary" id="btnViewCards"><svg><use href="#i-cards"/></svg>See All Cards</a>
-          <a href="rules.html" class="btn btn-ghost" id="btnLearnRules"><svg><use href="#i-book"/></svg>Learn to Play</a>
-        </div>
-      </div>
-      <div class="trait-strip" id="homeTraitStrip"></div>
-    </div>
-
-    <div class="home-spotlight" aria-label="Featured Atua cards">
-      <div class="home-spotlight-copy"><span class="eyebrow">EXPLORE THE COLLECTION</span><h2>Stories, strengths, and ways to help.</h2><p>Meet the illustrated Atua, then explore practical helper cards made for everyday learning and support.</p><a class="btn btn-primary" href="cards.html">Browse the collection <svg class="icon"><use href="#i-arrow-right"/></svg></a></div>
-      <div class="home-spotlight-art" id="homeHeroCards"></div>
-    </div>
-
-    <div class="home-section">
-      <div class="section-head"><h2>Card Types</h2></div>
-      <div class="type-strip" id="homeTypeStrip"></div>
-    </div>
-
-    <div class="home-section">
-      <div class="section-head"><h2>Helper Cards</h2></div>
-      <div class="type-strip" id="homeKindStrip"></div>
-    </div>
-
-    <div class="home-section">
-      <div class="section-head"><h2>Helper Card Artwork</h2><a href="cards.html?tab=support">Browse helper cards <svg class="icon" style="width:15px;height:15px"><use href="#i-arrow-right"/></svg></a></div>
-      <p class="section-intro">Accommodation, affirmation and task cards use the illustrations supplied with your project.</p>
-      <div class="card-grid home-helper-grid" id="homeHelperPreview"></div>
-    </div>
-
-    <div class="home-section">
-      <div class="section-head"><h2>The Five Elements</h2></div>
-      <div class="type-strip" id="homeElementStrip"></div>
-    </div>
-
-    <div class="home-section" style="margin-bottom:56px;">
-      <div class="section-head"><h2>Featured Atua</h2><a href="cards.html">See all <svg class="icon" style="width:15px;height:15px"><use href="#i-arrow-right"/></svg></a></div>
-      <div class="card-grid" id="homeCardPreview"></div>
-    </div>
+  <!-- ============ GAME RULES ============ -->
+  <section class="view" id="view-rules">
+    <div class="rules-page" id="rulesContent"></div>
   </section>
 
 </main>
@@ -193,7 +152,7 @@
     Māori words and macrons have been checked carefully. Card art © its listed artist. Built for demonstration. · <button type="button" class="footer-disclaimer-btn" id="openDisclaimerBtn">Image Disclaimer</button></p>
 </footer>
 
-<script src="js/data.js"></script>
-<script src="js/app.js"></script>
+<script src="../js/data.js"></script>
+<script src="../js/app.js"></script>
 </body>
 </html>
